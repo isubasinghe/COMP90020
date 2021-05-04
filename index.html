@@ -3,12 +3,12 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-05-04 Tue 16:41 -->
+<!-- 2021-05-04 Tue 16:52 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Distributed Algorithms</title>
-<meta name="generator" content="Org mode" />
 <meta name="author" content="Isitha Subasinghe" />
+<meta name="generator" content="Org Mode" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
   .title  { text-align: center;
@@ -245,56 +245,57 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org3cbf158">1. Time</a></li>
-<li><a href="#org56a83f7">2. Global States</a></li>
-<li><a href="#orgc183bd3">3. Mutual Exclusion</a></li>
-<li><a href="#org313d64b">4. Leader Election</a></li>
-<li><a href="#orgd82e4e3">5. Multicast</a></li>
-<li><a href="#orgaa00710">6. Consensus</a>
+<li><a href="#org9f7550d">1. Time</a></li>
+<li><a href="#orgb1cac7d">2. Global States</a></li>
+<li><a href="#org3f5c48c">3. Mutual Exclusion</a></li>
+<li><a href="#org34dbe00">4. Leader Election</a></li>
+<li><a href="#orge5a6dda">5. Multicast</a></li>
+<li><a href="#orgb46a596">6. Consensus</a>
 <ul>
-<li><a href="#org12c7b49">6.1. Motivation</a></li>
-<li><a href="#org34212b5">6.2. Attempt to communicate and agree on the value of something</a></li>
-<li><a href="#org9b26e56">6.3. Byzantine generals problem</a></li>
-<li><a href="#org3f6f7a6">6.4. Problem formulation</a>
+<li><a href="#org24edb91">6.1. Motivation</a></li>
+<li><a href="#org9cd9657">6.2. Attempt to communicate and agree on the value of something</a></li>
+<li><a href="#orgf21f591">6.3. Byzantine generals problem</a></li>
+<li><a href="#org64d8d3e">6.4. Problem formulation</a>
 <ul>
-<li><a href="#org8235e7d">6.4.1. Consensus condition (without failures):</a></li>
-<li><a href="#org3cb9a62">6.4.2. Failure Model:</a></li>
-<li><a href="#org011f96e">6.4.3. Other definitions of integrity</a></li>
+<li><a href="#orgc5f463c">6.4.1. Consensus condition (without failures):</a></li>
+<li><a href="#org62ef601">6.4.2. Failure Model:</a></li>
+<li><a href="#org864e59a">6.4.3. Other definitions of integrity</a></li>
 </ul>
 </li>
-<li><a href="#orga10b489">6.5. Solution to consensus</a>
+<li><a href="#orgf7a7d09">6.5. Solution to consensus</a>
 <ul>
-<li><a href="#org52e5e81">6.5.1. Solving consensus in a synchronous system.</a></li>
+<li><a href="#org10d6c4a">6.5.1. Solving consensus in a synchronous system.</a></li>
+<li><a href="#org0bea82a">6.5.2. Exponential Information Gathering</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#org09ea914">7. Transactions</a></li>
-<li><a href="#orga03827d">8. Distributed Transactions</a></li>
+<li><a href="#orgdfa6428">7. Transactions</a></li>
+<li><a href="#orgef2e8d4">8. Distributed Transactions</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org3cbf158" class="outline-2">
-<h2 id="org3cbf158"><span class="section-number-2">1</span> Time</h2>
+<div id="outline-container-org9f7550d" class="outline-2">
+<h2 id="org9f7550d"><span class="section-number-2">1</span> Time</h2>
 </div>
-<div id="outline-container-org56a83f7" class="outline-2">
-<h2 id="org56a83f7"><span class="section-number-2">2</span> Global States</h2>
+<div id="outline-container-orgb1cac7d" class="outline-2">
+<h2 id="orgb1cac7d"><span class="section-number-2">2</span> Global States</h2>
 </div>
-<div id="outline-container-orgc183bd3" class="outline-2">
-<h2 id="orgc183bd3"><span class="section-number-2">3</span> Mutual Exclusion</h2>
+<div id="outline-container-org3f5c48c" class="outline-2">
+<h2 id="org3f5c48c"><span class="section-number-2">3</span> Mutual Exclusion</h2>
 </div>
-<div id="outline-container-org313d64b" class="outline-2">
-<h2 id="org313d64b"><span class="section-number-2">4</span> Leader Election</h2>
+<div id="outline-container-org34dbe00" class="outline-2">
+<h2 id="org34dbe00"><span class="section-number-2">4</span> Leader Election</h2>
 </div>
-<div id="outline-container-orgd82e4e3" class="outline-2">
-<h2 id="orgd82e4e3"><span class="section-number-2">5</span> Multicast</h2>
+<div id="outline-container-orge5a6dda" class="outline-2">
+<h2 id="orge5a6dda"><span class="section-number-2">5</span> Multicast</h2>
 </div>
-<div id="outline-container-orgaa00710" class="outline-2">
-<h2 id="orgaa00710"><span class="section-number-2">6</span> Consensus</h2>
+<div id="outline-container-orgb46a596" class="outline-2">
+<h2 id="orgb46a596"><span class="section-number-2">6</span> Consensus</h2>
 <div class="outline-text-2" id="text-6">
 </div>
-<div id="outline-container-org12c7b49" class="outline-3">
-<h3 id="org12c7b49"><span class="section-number-3">6.1</span> Motivation</h3>
+<div id="outline-container-org24edb91" class="outline-3">
+<h3 id="org24edb91"><span class="section-number-3">6.1</span> Motivation</h3>
 <div class="outline-text-3" id="text-6-1">
 <ul class="org-ul">
 <li>Database transactions</li>
@@ -303,12 +304,12 @@
 </ul>
 </div>
 </div>
-<div id="outline-container-org34212b5" class="outline-3">
-<h3 id="org34212b5"><span class="section-number-3">6.2</span> Attempt to communicate and agree on the value of something</h3>
+<div id="outline-container-org9cd9657" class="outline-3">
+<h3 id="org9cd9657"><span class="section-number-3">6.2</span> Attempt to communicate and agree on the value of something</h3>
 </div>
 
-<div id="outline-container-org9b26e56" class="outline-3">
-<h3 id="org9b26e56"><span class="section-number-3">6.3</span> Byzantine generals problem</h3>
+<div id="outline-container-orgf21f591" class="outline-3">
+<h3 id="orgf21f591"><span class="section-number-3">6.3</span> Byzantine generals problem</h3>
 <div class="outline-text-3" id="text-6-3">
 <ul class="org-ul">
 <li>Several generals plan a coordinated attack from different directions</li>
@@ -320,18 +321,18 @@
 </ul>
 </div>
 </div>
-<div id="outline-container-org3f6f7a6" class="outline-3">
-<h3 id="org3f6f7a6"><span class="section-number-3">6.4</span> Problem formulation</h3>
+<div id="outline-container-org64d8d3e" class="outline-3">
+<h3 id="org64d8d3e"><span class="section-number-3">6.4</span> Problem formulation</h3>
 <div class="outline-text-3" id="text-6-4">
 <ul class="org-ul">
 <li>\(G = (V, E)\) undirected graph</li>
-<li>Synchronous model. \(|V|\) = n processes(called "nodes" here)</li>
+<li>Synchronous model. \(|V|\) = n processes(called &ldquo;nodes&rdquo; here)</li>
 <li>Neighbouring nodes exchange messages (over multiple rounds)</li>
 <li>Each node set value of a decision variable \(d_i\)</li>
 </ul>
 </div>
-<div id="outline-container-org8235e7d" class="outline-4">
-<h4 id="org8235e7d"><span class="section-number-4">6.4.1</span> Consensus condition (without failures):</h4>
+<div id="outline-container-orgc5f463c" class="outline-4">
+<h4 id="orgc5f463c"><span class="section-number-4">6.4.1</span> Consensus condition (without failures):</h4>
 <div class="outline-text-4" id="text-6-4-1">
 <ul class="org-ul">
 <li>Termination: eventually each node sets its decision variable.</li>
@@ -340,8 +341,8 @@
 </ul>
 </div>
 </div>
-<div id="outline-container-org3cb9a62" class="outline-4">
-<h4 id="org3cb9a62"><span class="section-number-4">6.4.2</span> Failure Model:</h4>
+<div id="outline-container-org62ef601" class="outline-4">
+<h4 id="org62ef601"><span class="section-number-4">6.4.2</span> Failure Model:</h4>
 <div class="outline-text-4" id="text-6-4-2">
 <ul class="org-ul">
 <li>Link failure: transmitted messages may never arrive at the destination.</li>
@@ -359,8 +360,8 @@
 </ul>
 </div>
 </div>
-<div id="outline-container-org011f96e" class="outline-4">
-<h4 id="org011f96e"><span class="section-number-4">6.4.3</span> Other definitions of integrity</h4>
+<div id="outline-container-org864e59a" class="outline-4">
+<h4 id="org864e59a"><span class="section-number-4">6.4.3</span> Other definitions of integrity</h4>
 <div class="outline-text-4" id="text-6-4-3">
 <p>
 Depending on applications, we can have different integrity requirements.
@@ -374,16 +375,16 @@ typically needed for transactions where all commit or none do.</li>
 </div>
 </div>
 </div>
-<div id="outline-container-orga10b489" class="outline-3">
-<h3 id="orga10b489"><span class="section-number-3">6.5</span> Solution to consensus</h3>
+<div id="outline-container-orgf7a7d09" class="outline-3">
+<h3 id="orgf7a7d09"><span class="section-number-3">6.5</span> Solution to consensus</h3>
 <div class="outline-text-3" id="text-6-5">
 <p>
 There is no solution to consensus in an asynchronous system with one process failure.
-This was shown in the FLP paper (also known as the "impossibility result").
+This was shown in the FLP paper (also known as the &ldquo;impossibility result&rdquo;).
 </p>
 </div>
-<div id="outline-container-org52e5e81" class="outline-4">
-<h4 id="org52e5e81"><span class="section-number-4">6.5.1</span> Solving consensus in a synchronous system.</h4>
+<div id="outline-container-org10d6c4a" class="outline-4">
+<h4 id="org10d6c4a"><span class="section-number-4">6.5.1</span> Solving consensus in a synchronous system.</h4>
 <div class="outline-text-4" id="text-6-5-1">
 <p>
 The floodset algorithm can solve consensus in a synchronous system.
@@ -401,22 +402,30 @@ The floodset algorithm can solve consensus in a synchronous system.
 <li>Depends on the number of failed processes f</li>
 <li>For general f: \(k = f + 1\)</li>
 </ul></li>
+<li>Complexity
+<ul class="org-ul">
+<li>Number of rounds: f + 1</li>
+<li>Total number of messages: \(O((f+1)n^2))\)</li>
+<li>Total number of bits: \(O((f + 1)n^3 * b))\)</li>
+</ul></li>
 </ul>
 </div>
 </div>
+<div id="outline-container-org0bea82a" class="outline-4">
+<h4 id="org0bea82a"><span class="section-number-4">6.5.2</span> Exponential Information Gathering</h4>
 </div>
 </div>
-<div id="outline-container-org09ea914" class="outline-2">
-<h2 id="org09ea914"><span class="section-number-2">7</span> Transactions</h2>
 </div>
-<div id="outline-container-orga03827d" class="outline-2">
-<h2 id="orga03827d"><span class="section-number-2">8</span> Distributed Transactions</h2>
+<div id="outline-container-orgdfa6428" class="outline-2">
+<h2 id="orgdfa6428"><span class="section-number-2">7</span> Transactions</h2>
+</div>
+<div id="outline-container-orgef2e8d4" class="outline-2">
+<h2 id="orgef2e8d4"><span class="section-number-2">8</span> Distributed Transactions</h2>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Isitha Subasinghe</p>
-<p class="date">Created: 2021-05-04 Tue 16:41</p>
-<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+<p class="date">Created: 2021-05-04 Tue 16:52</p>
 </div>
 </body>
 </html>

@@ -49,3 +49,8 @@ The floodset algorithm can solve consensus in a synchronous system.
 - How large should k be?
   - Depends on the number of failed processes f
   - For general f: $k = f + 1$
+- Complexity
+  - Number of rounds: f + 1
+  - Total number of messages: $O((f+1)n^2))$
+  - Total number of bits: $O((f + 1)n^3 * b))$
+*** Exponential Information Gathering
