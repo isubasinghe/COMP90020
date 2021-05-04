@@ -1,0 +1,28 @@
+* Consensus
+** Motivation
+- Database transactions
+- Leader Election
+- Replicated State Machines
+** Attempt to communicate and agree on the value of something
+
+** Byzantine generals problem
+- Several generals plan a coordinated attack from different directions
+- Succeed only if all attack
+- Fail if only some attack
+- Each general has an initial opinion
+- Can exchange information using messengers
+- *Challenge:* messengers can be lost, or some generals can be treacherous.
+** Problem formulation
+- $G = (V, E)$ undirected graph
+- Synchronous model. $|V|$ = n processes(called "nodes" here)
+- Neighbouring nodes exchange messages (over multiple rounds)
+- Each node set value of a decision variable $d_i$
+*** Consensus condition (without failures):
+- Termination: eventually each node sets its decision variable.
+- Agreement: $d_i=d_j$ for all $i, j$
+- Integrity/Validity: if $v_i = v$ for all $i$, then $d_i=v$ for all $i$.
+*** Failure Model:
+- Link failure: transmitted messages may never arrive at the destination.
+- Process failure:
+  - Stopping failure: node crashes after some rounds.
+  - Byzantine failure: node can behave in arbitary ways

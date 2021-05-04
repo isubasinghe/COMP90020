@@ -1,0 +1,10 @@
+#+TITLE: Distributed Algorithms
+#+AUTHOR: Isitha Subasinghe
+#+INCLUDE: time.org
+#+INCLUDE: global-states.org
+#+INCLUDE: mutual-exclusion.org
+#+INCLUDE: leader-election.org
+#+INCLUDE: multicast.org
+#+INCLUDE: consensus.org
+#+INCLUDE: transactions.org
+#+INCLUDE: distributed-transactions.org
