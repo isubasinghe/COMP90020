@@ -26,3 +26,26 @@
 - Process failure:
   - Stopping failure: node crashes after some rounds.
   - Byzantine failure: node can behave in arbitary ways
+- Cannot control behaviour of crashed or Byzantine nodes. We need to *amend definitions*
+  - *Termination:* eventually each correct node sets its decision variable
+  - *Agreement:* $d_i=d_j$ for all correct nodes.
+  - *Integrity:* if $v_i = v$ for all $i$, then $d_i=v$ for all correct nodes.
+*** Other definitions of integrity
+Depending on applications, we can have different integrity requirements.
+- If $v_i = v$ for all correct nodes, then $d_i = v$ for all correct nodes. (Byzantine Agreement/ Byzantine Consensus)
+- If there is a special node $v_j$ and if it is correct then $d_i = v_j$ for all correct nodes. (Byzantine broadcast)
+- $D = {0, 1}$. If $v_i = 0$ for any i, then $d_i = 0$ for all $i$. If $v_i =1$ for all $i$ then $d_i = 1$ for all i. This is
+  typically needed for transactions where all commit or none do.
+** Solution to consensus
+ There is no solution to consensus in an asynchronous system with one process failure.
+ This was shown in the FLP paper (also known as the "impossibility result").
+*** Solving consensus in a synchronous system.
+The floodset algorithm can solve consensus in a synchronous system.
+- Node $i$ keeps a set $W_i \subseteq D$, firstly containing its own value $v_i$
+- At each round, each node broadcasts $W_i$ to everyone, add any received elements to $W_i$. That is $W_i' = W_i \cap Recv(i)$
+- After k rounds
+  - If $|W_i|$ then decide on the unique value.
+  - Else decide on the default value.
+- How large should k be?
+  - Depends on the number of failed processes f
+  - For general f: $k = f + 1$

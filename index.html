@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2021-05-04 Tue 16:41 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Distributed Algorithms</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Isitha Subasinghe" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Distributed Algorithms</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org3cbf158">1. Time</a></li>
+<li><a href="#org56a83f7">2. Global States</a></li>
+<li><a href="#orgc183bd3">3. Mutual Exclusion</a></li>
+<li><a href="#org313d64b">4. Leader Election</a></li>
+<li><a href="#orgd82e4e3">5. Multicast</a></li>
+<li><a href="#orgaa00710">6. Consensus</a>
+<ul>
+<li><a href="#org12c7b49">6.1. Motivation</a></li>
+<li><a href="#org34212b5">6.2. Attempt to communicate and agree on the value of something</a></li>
+<li><a href="#org9b26e56">6.3. Byzantine generals problem</a></li>
+<li><a href="#org3f6f7a6">6.4. Problem formulation</a>
+<ul>
+<li><a href="#org8235e7d">6.4.1. Consensus condition (without failures):</a></li>
+<li><a href="#org3cb9a62">6.4.2. Failure Model:</a></li>
+<li><a href="#org011f96e">6.4.3. Other definitions of integrity</a></li>
+</ul>
+</li>
+<li><a href="#orga10b489">6.5. Solution to consensus</a>
+<ul>
+<li><a href="#org52e5e81">6.5.1. Solving consensus in a synchronous system.</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org09ea914">7. Transactions</a></li>
+<li><a href="#orga03827d">8. Distributed Transactions</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org3cbf158" class="outline-2">
+<h2 id="org3cbf158"><span class="section-number-2">1</span> Time</h2>
+</div>
+<div id="outline-container-org56a83f7" class="outline-2">
+<h2 id="org56a83f7"><span class="section-number-2">2</span> Global States</h2>
+</div>
+<div id="outline-container-orgc183bd3" class="outline-2">
+<h2 id="orgc183bd3"><span class="section-number-2">3</span> Mutual Exclusion</h2>
+</div>
+<div id="outline-container-org313d64b" class="outline-2">
+<h2 id="org313d64b"><span class="section-number-2">4</span> Leader Election</h2>
+</div>
+<div id="outline-container-orgd82e4e3" class="outline-2">
+<h2 id="orgd82e4e3"><span class="section-number-2">5</span> Multicast</h2>
+</div>
+<div id="outline-container-orgaa00710" class="outline-2">
+<h2 id="orgaa00710"><span class="section-number-2">6</span> Consensus</h2>
+<div class="outline-text-2" id="text-6">
+</div>
+<div id="outline-container-org12c7b49" class="outline-3">
+<h3 id="org12c7b49"><span class="section-number-3">6.1</span> Motivation</h3>
+<div class="outline-text-3" id="text-6-1">
+<ul class="org-ul">
+<li>Database transactions</li>
+<li>Leader Election</li>
+<li>Replicated State Machines</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org34212b5" class="outline-3">
+<h3 id="org34212b5"><span class="section-number-3">6.2</span> Attempt to communicate and agree on the value of something</h3>
+</div>
+
+<div id="outline-container-org9b26e56" class="outline-3">
+<h3 id="org9b26e56"><span class="section-number-3">6.3</span> Byzantine generals problem</h3>
+<div class="outline-text-3" id="text-6-3">
+<ul class="org-ul">
+<li>Several generals plan a coordinated attack from different directions</li>
+<li>Succeed only if all attack</li>
+<li>Fail if only some attack</li>
+<li>Each general has an initial opinion</li>
+<li>Can exchange information using messengers</li>
+<li><b>Challenge:</b> messengers can be lost, or some generals can be treacherous.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org3f6f7a6" class="outline-3">
+<h3 id="org3f6f7a6"><span class="section-number-3">6.4</span> Problem formulation</h3>
+<div class="outline-text-3" id="text-6-4">
+<ul class="org-ul">
+<li>\(G = (V, E)\) undirected graph</li>
+<li>Synchronous model. \(|V|\) = n processes(called "nodes" here)</li>
+<li>Neighbouring nodes exchange messages (over multiple rounds)</li>
+<li>Each node set value of a decision variable \(d_i\)</li>
+</ul>
+</div>
+<div id="outline-container-org8235e7d" class="outline-4">
+<h4 id="org8235e7d"><span class="section-number-4">6.4.1</span> Consensus condition (without failures):</h4>
+<div class="outline-text-4" id="text-6-4-1">
+<ul class="org-ul">
+<li>Termination: eventually each node sets its decision variable.</li>
+<li>Agreement: \(d_i=d_j\) for all \(i, j\)</li>
+<li>Integrity/Validity: if \(v_i = v\) for all \(i\), then \(d_i=v\) for all \(i\).</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org3cb9a62" class="outline-4">
+<h4 id="org3cb9a62"><span class="section-number-4">6.4.2</span> Failure Model:</h4>
+<div class="outline-text-4" id="text-6-4-2">
+<ul class="org-ul">
+<li>Link failure: transmitted messages may never arrive at the destination.</li>
+<li>Process failure:
+<ul class="org-ul">
+<li>Stopping failure: node crashes after some rounds.</li>
+<li>Byzantine failure: node can behave in arbitary ways</li>
+</ul></li>
+<li>Cannot control behaviour of crashed or Byzantine nodes. We need to <b>amend definitions</b>
+<ul class="org-ul">
+<li><b>Termination:</b> eventually each correct node sets its decision variable</li>
+<li><b>Agreement:</b> \(d_i=d_j\) for all correct nodes.</li>
+<li><b>Integrity:</b> if \(v_i = v\) for all \(i\), then \(d_i=v\) for all correct nodes.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org011f96e" class="outline-4">
+<h4 id="org011f96e"><span class="section-number-4">6.4.3</span> Other definitions of integrity</h4>
+<div class="outline-text-4" id="text-6-4-3">
+<p>
+Depending on applications, we can have different integrity requirements.
+</p>
+<ul class="org-ul">
+<li>If \(v_i = v\) for all correct nodes, then \(d_i = v\) for all correct nodes. (Byzantine Agreement/ Byzantine Consensus)</li>
+<li>If there is a special node \(v_j\) and if it is correct then \(d_i = v_j\) for all correct nodes. (Byzantine broadcast)</li>
+<li>\(D = {0, 1}\). If \(v_i = 0\) for any i, then \(d_i = 0\) for all \(i\). If \(v_i =1\) for all \(i\) then \(d_i = 1\) for all i. This is
+typically needed for transactions where all commit or none do.</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-orga10b489" class="outline-3">
+<h3 id="orga10b489"><span class="section-number-3">6.5</span> Solution to consensus</h3>
+<div class="outline-text-3" id="text-6-5">
+<p>
+There is no solution to consensus in an asynchronous system with one process failure.
+This was shown in the FLP paper (also known as the "impossibility result").
+</p>
+</div>
+<div id="outline-container-org52e5e81" class="outline-4">
+<h4 id="org52e5e81"><span class="section-number-4">6.5.1</span> Solving consensus in a synchronous system.</h4>
+<div class="outline-text-4" id="text-6-5-1">
+<p>
+The floodset algorithm can solve consensus in a synchronous system.
+</p>
+<ul class="org-ul">
+<li>Node \(i\) keeps a set \(W_i \subseteq D\), firstly containing its own value \(v_i\)</li>
+<li>At each round, each node broadcasts \(W_i\) to everyone, add any received elements to \(W_i\). That is \(W_i' = W_i \cap Recv(i)\)</li>
+<li>After k rounds
+<ul class="org-ul">
+<li>If \(|W_i|\) then decide on the unique value.</li>
+<li>Else decide on the default value.</li>
+</ul></li>
+<li>How large should k be?
+<ul class="org-ul">
+<li>Depends on the number of failed processes f</li>
+<li>For general f: \(k = f + 1\)</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org09ea914" class="outline-2">
+<h2 id="org09ea914"><span class="section-number-2">7</span> Transactions</h2>
+</div>
+<div id="outline-container-orga03827d" class="outline-2">
+<h2 id="orga03827d"><span class="section-number-2">8</span> Distributed Transactions</h2>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Isitha Subasinghe</p>
+<p class="date">Created: 2021-05-04 Tue 16:41</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
